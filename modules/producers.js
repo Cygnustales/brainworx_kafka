@@ -4,11 +4,13 @@ const kafka = require('kafka-node');
 const config = require('../config/kafka');
 
 function pushTopic(req, res, next) {
+    console.log("producer running")
+    console.log(config)
     try {
     const Producer = kafka.Producer;
     const client = new kafka.Client(config.kafka_server);
     const producer = new Producer(client);
-    const kafka_topic = 'example';
+    const kafka_topic = config.kafka_topic;
     console.log(kafka_topic);
     let payloads = [
         {

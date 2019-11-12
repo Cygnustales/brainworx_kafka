@@ -30,13 +30,13 @@ function getTopic(req, res, next) {
           let transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-              user: 'email360@gmail.com>',
-              pass: 'password'
+              user: config.sender_email,
+              pass: sender_email.sender_password
             }
           });
           let mailOptions = {
-            from: 'Email Notificationt<email360@gmail.com>',
-            to: 'bdkusuma@gmail.com',
+            from: config.sender_name +'<'+config.sender_email+'>',
+            to: config.destination_email,
             subject: `Message from ` + config.kafka_topic,
             text: message.value
           };
