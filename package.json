@@ -1,0 +1,22 @@
+{
+  "name": "kafka-api",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "fix-memory-limit": "cross-env LIMIT=8192 increase-memory-limit",
+    "start": "node ./bin/www --max-old-space-size=8192"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.4",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "express": "~4.16.0",
+    "http-errors": "~1.6.2",
+    "increase-memory-limit": "^1.0.3",
+    "lodash": "^4.17.11",
+    "kafka-node": "^2.4.1",
+    "nodemon": "^1.17.3",
+    "nodemailer": "^6.0.0"
+  }
+}

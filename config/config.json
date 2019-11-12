@@ -1,0 +1,20 @@
+{
+    "development": {
+        "config_id": "development",
+        "app_name": "Brainworx Kafka API",
+        "app_desc": "Confluent Kafka nodeJS Middleware",
+        "node_port": 3000,
+        "json_indentation": 4,
+        "kafka": "localhost:2181",
+        "topic": "mytopic"
+    },
+    "production": {
+        "config_id": "production",
+        "app_name": "Brainworx Kafka API",
+        "app_desc": "Confluent Kafka nodeJS Middleware",
+        "node_port": 3000,
+        "json_indentation": 4,
+        "kafka": "localhost:2181",
+        "topic": "mytopic"
+    }
+}
