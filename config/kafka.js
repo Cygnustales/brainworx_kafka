@@ -1,10 +1,10 @@
 
 module.exports = {
-    kafka_topic: "mytopic",
+    kafka_topic: "simplicity.test.dbo.Transaction",
     kafka_server: "localhost:2181",
-    sender_email: "sender@gmail.com",
-    sender_password: "password",
+    sender_email: "emailkirim360@gmail.com",
+    sender_password: "formytest",
     sender_name: "Email Sender",
-    destination_email: "destination@gmail.com"
+    destination_email: "bdkusuma@gmail.com"
   };
   
