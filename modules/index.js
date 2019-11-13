@@ -12,14 +12,14 @@ const config = require('../config/kafka');
         const client = new kafka.Client(config.kafka_server);
         let consumer = new Consumer(
           client,
-          [{ topic: config.kafka_topic, partition: 0, }],
+          [{ topic: config.kafka_topic, partition: 0, offset: -1}],
           {
+            fromOffset: 'latest',
             commitOffsetsOnFirstJoin: false,
             autoCommit: false,
             // fetchMaxWaitMs: 15000,
             // fetchMaxBytes: 1024 * 1024,
-            encoding: 'utf8',
-            fromOffset: 'latest'
+            encoding: 'utf8'
           }
         );
         consumer.on('message', async function(message) {
