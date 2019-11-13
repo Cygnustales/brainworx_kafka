@@ -10,33 +10,24 @@ const config = require('../config/kafka');
     try {
         const Consumer = kafka.HighLevelConsumer;
         const client = new kafka.Client(config.kafka_server);
-        
-        var offset = new kafka.Offset(client);
-
-        offset.fetch([{ topic: config.kafka_topic, partition: 0, time: -1 }], function (err, data) {
-          var latestOffset = data[config.kafka_topic]['0'][0];
-          console.log(data)
-          console.log("Consumer current offset: " + latestOffset);
-
-          // let consumer = new Consumer(
-          //   client,
-          //   [{ topic: config.kafka_topic, partition: 0, time: -1 }],
-          //   {
-          //     autoCommit: false,
-          //     fetchMaxWaitMs: 15000,
-          //     fetchMaxBytes: 1024 * 1024,
-          //     encoding: 'utf8',
-          //     fromOffset: latestOffset
-          //   }
-          // );
-        
-  });
-        // consumer.on('message', async function(message) {
+        let consumer = new Consumer(
+          client,
+          [{ topic: config.kafka_topic, partition: 0, }],
+          {
+            commitOffsetsOnFirstJoin: false,
+            autoCommit: false,
+            fetchMaxWaitMs: 15000,
+            fetchMaxBytes: 1024 * 1024,
+            encoding: 'utf8',
+            fromOffset: 'latest'
+          }
+        );
+        consumer.on('message', async function(message) {
           
-        //   console.log(
-        //     'kafka : ',
-        //     message.value
-        //   );
+          console.log(
+            'kafka : ',
+            message.value
+          );
           ///Please use Valid SMTP
           // let transporter = nodemailer.createTransport({
           //   service: 'gmail',
@@ -60,10 +51,10 @@ const config = require('../config/kafka');
               
           //   }
           // });
-        //})
-        // consumer.on('error', function(err) {
-        //   console.log('error', err);
-        // });
+        })
+        consumer.on('error', function(err) {
+          console.log('error', err);
+        });
       }
       catch(e) {
         console.log(e);
