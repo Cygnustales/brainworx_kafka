@@ -12,13 +12,13 @@ const config = require('../config/kafka');
         const client = new kafka.Client(config.kafka_server);
         let consumer = new Consumer(
           client,
-          [{ topic: config.kafka_topic, partition: 0 }],
+          [{ topic: config.kafka_topic, partition: 0, time: -1 }],
           {
             autoCommit: false,
             fetchMaxWaitMs: 15000,
             fetchMaxBytes: 1024 * 1024,
             encoding: 'utf8',
-            fromOffset: false
+            fromOffset: -1
           }
         );
         consumer.on('message', async function(message) {
