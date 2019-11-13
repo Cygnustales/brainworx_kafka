@@ -32,7 +32,7 @@ const config = require('../config/kafka');
             service: 'gmail',
             auth: {
               user: config.sender_email,
-              pass: sender_email.sender_password
+              pass: sender_password
             }
           });
           let mailOptions = {
