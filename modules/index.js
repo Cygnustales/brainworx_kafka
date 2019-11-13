@@ -10,7 +10,7 @@ const config = require('../config/kafka');
     try {
         const Consumer = kafka.HighLevelConsumer;
         const client = new kafka.KafkaClient(config.kafka_server);
-        let consumer = new Consumer(
+        let consumer = new client(
           client,
           [{ topic: config.kafka_topic, partition: 0, offset: -1}],
           {
