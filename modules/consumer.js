@@ -15,7 +15,8 @@ function getTopic(req, res, next) {
           [{ topic: config.kafka_topic, partition: 0 }],
           {
             autoCommit: true,
-            fetchMaxWaitMs: 1000,
+            autoCommitIntervalMs: 5000,
+            fetchMaxWaitMs: 10000,
             fetchMaxBytes: 1024 * 1024,
             encoding: 'utf8',
             fromOffset: 'latest'
