@@ -21,12 +21,17 @@ const config = require('../config/kafka');
             fromOffset: -1
           }
         );
-        consumer.on('message', async function(message) {
+
+        offset.fetch([{ topic: 'myTopic', partition: 0, time: -1 }], function (err, data) {
+          var latestOffset = data['myTopic']['0'][0];
+          console.log("Consumer current offset: " + latestOffset);
+  });
+        // consumer.on('message', async function(message) {
           
-          console.log(
-            'kafka : ',
-            message.value
-          );
+        //   console.log(
+        //     'kafka : ',
+        //     message.value
+        //   );
           ///Please use Valid SMTP
           // let transporter = nodemailer.createTransport({
           //   service: 'gmail',
@@ -50,7 +55,7 @@ const config = require('../config/kafka');
               
           //   }
           // });
-        })
+        //})
         consumer.on('error', function(err) {
           console.log('error', err);
         });
