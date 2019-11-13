@@ -16,8 +16,8 @@ const config = require('../config/kafka');
           {
             commitOffsetsOnFirstJoin: false,
             autoCommit: false,
-            fetchMaxWaitMs: 15000,
-            fetchMaxBytes: 1024 * 1024,
+            // fetchMaxWaitMs: 15000,
+            // fetchMaxBytes: 1024 * 1024,
             encoding: 'utf8',
             fromOffset: 'latest'
           }
