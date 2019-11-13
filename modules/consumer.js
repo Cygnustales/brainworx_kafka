@@ -19,7 +19,7 @@ function getTopic(req, res, next) {
             fetchMaxWaitMs: 10000,
             fetchMaxBytes: 1024 * 1024,
             encoding: 'utf8',
-            fromOffset: 'latest'
+            fromOffset: latest,
           }
         );
         consumer.on('message', async function(message) {
