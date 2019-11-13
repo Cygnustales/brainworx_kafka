@@ -10,6 +10,11 @@ function getTopic(req, res, next) {
     try {
         const Consumer = kafka.HighLevelConsumer;
         const client = new kafka.Client(config.kafka_server);
+
+        
+
+
+
         let consumer = new Consumer(
           client,
           [{ topic: config.kafka_topic, partition: 0 }],
@@ -19,38 +24,53 @@ function getTopic(req, res, next) {
             fetchMaxWaitMs: 10000,
             fetchMaxBytes: 1024 * 1024,
             encoding: 'utf8',
-            fromOffset: latest,
+            fromOffset: -1,
           }
         );
-        consumer.on('message', async function(message) {
-          console.log('here');
-          console.log(
-            'kafka-> ',
-            message.value
-          );
-          let transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-              user: config.sender_email,
-              pass: sender_email.sender_password
-            }
-          });
-          let mailOptions = {
-            from: config.sender_name +'<'+config.sender_email+'>',
-            to: config.destination_email,
-            subject: `Message from ` + config.kafka_topic,
-            text: message.value
-          };
-          transporter.sendMail(mailOptions, function(error, info) {
+
+        offset.fetch([{ topic: 'myTopic', partition: 0, time: -1 }], function (err, data) {
+          var latestOffset = data['myTopic']['0'][0];
+          console.log("Consumer current offset: " + latestOffset);
+  });
+  
+  // var consumer = new kafka.HighLevelConsumer(
+  //         consumerClient,
+  //         [
+  //             { topic: 'myTopic', partition: 0, fromOffset: -1 }
+  //         ],
+  //         {
+  //             autoCommit: false
+  //         }
+  // );
+        // consumer.on('message', async function(message) {
+        //   console.log('here');
+        //   console.log(
+        //     'kafka-> ',
+        //     message.value
+        //   );
+        //   let transporter = nodemailer.createTransport({
+        //     service: 'gmail',
+        //     auth: {
+        //       user: config.sender_email,
+        //       pass: sender_email.sender_password
+        //     }
+        //   });
+        //   let mailOptions = {
+        //     from: config.sender_name +'<'+config.sender_email+'>',
+        //     to: config.destination_email,
+        //     subject: `Message from ` + config.kafka_topic,
+        //     text: message.value
+        //   };
+        //   transporter.sendMail(mailOptions, function(error, info) {
       
-            if (error) {
-              throw error;
-            } else {
-              console.log('Email successfully sent!');
+        //     if (error) {
+        //       throw error;
+        //     } else {
+        //       console.log('Email successfully sent!');
               
-            }
-          });
-        })
+        //     }
+        //   });
+        // })
         consumer.on('error', function(err) {
           console.log('error', err);
         });
