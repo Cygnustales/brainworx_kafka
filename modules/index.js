@@ -14,7 +14,7 @@ const config = require('../config/kafka');
           client,
           [{ topic: config.kafka_topic, partition: 0 }],
           {
-            autoCommit: true,
+            autoCommit: false,
             fetchMaxWaitMs: 1000,
             fetchMaxBytes: 1024 * 1024,
             encoding: 'utf8',
@@ -28,7 +28,7 @@ const config = require('../config/kafka');
             message.value
           );
          // console.log(config)
-         function send(){
+         
           let transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
@@ -51,9 +51,6 @@ const config = require('../config/kafka');
               
             }
           });
-         }
-         setTimeout(send, 3000);
-          
         })
         consumer.on('error', function(err) {
           console.log('error', err);
