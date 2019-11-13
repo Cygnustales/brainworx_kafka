@@ -15,27 +15,21 @@ const config = require('../config/kafka');
 
         offset.fetch([{ topic: config.kafka_topic, partition: 0, time: -1 }], function (err, data) {
           var latestOffset = data[config.kafka_topic]['0'][0];
+          console.log(data)
           console.log("Consumer current offset: " + latestOffset);
 
-          let consumer = new Consumer(
-            client,
-            [{ topic: config.kafka_topic, partition: 0, time: -1 }],
-            {
-              autoCommit: false,
-              fetchMaxWaitMs: 15000,
-              fetchMaxBytes: 1024 * 1024,
-              encoding: 'utf8',
-              fromOffset: latestOffset
-            }
-          );
-          consumer.on('message', async function(message) {
-          
-              console.log(
-                'kafka : ',
-                message.value
-              );
-
-          })
+          // let consumer = new Consumer(
+          //   client,
+          //   [{ topic: config.kafka_topic, partition: 0, time: -1 }],
+          //   {
+          //     autoCommit: false,
+          //     fetchMaxWaitMs: 15000,
+          //     fetchMaxBytes: 1024 * 1024,
+          //     encoding: 'utf8',
+          //     fromOffset: latestOffset
+          //   }
+          // );
+        
   });
         // consumer.on('message', async function(message) {
           
