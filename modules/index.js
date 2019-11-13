@@ -10,22 +10,32 @@ const config = require('../config/kafka');
     try {
         const Consumer = kafka.HighLevelConsumer;
         const client = new kafka.Client(config.kafka_server);
-        let consumer = new Consumer(
-          client,
-          [{ topic: config.kafka_topic, partition: 0, time: -1 }],
-          {
-            autoCommit: false,
-            fetchMaxWaitMs: 15000,
-            fetchMaxBytes: 1024 * 1024,
-            encoding: 'utf8',
-            fromOffset: -1
-          }
-        );
+        
         var offset = new kafka.Offset(client);
 
         offset.fetch([{ topic: config.kafka_topic, partition: 0, time: -1 }], function (err, data) {
           var latestOffset = data[config.kafka_topic]['0'][0];
           console.log("Consumer current offset: " + latestOffset);
+
+          let consumer = new Consumer(
+            client,
+            [{ topic: config.kafka_topic, partition: 0, time: -1 }],
+            {
+              autoCommit: false,
+              fetchMaxWaitMs: 15000,
+              fetchMaxBytes: 1024 * 1024,
+              encoding: 'utf8',
+              fromOffset: latestOffset
+            }
+          );
+          consumer.on('message', async function(message) {
+          
+              console.log(
+                'kafka : ',
+                message.value
+              );
+
+          })
   });
         // consumer.on('message', async function(message) {
           
