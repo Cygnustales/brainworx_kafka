@@ -45,7 +45,7 @@ consumer.on('event.error', function(err) {
 
 //counter to commit offsets every numMessages are received
 var counter = 0;
-var numMessages = 5;
+var numMessages = 1;
 
 consumer.on('ready', function(arg) {
   console.log('consumer ready.' + JSON.stringify(arg));
@@ -53,6 +53,7 @@ consumer.on('ready', function(arg) {
   consumer.subscribe([topicName]);
   //start consuming messages
   consumer.consume();
+  
 });
 
 
@@ -68,6 +69,28 @@ consumer.on('data', function(m) {
   // Output the actual message contents
   console.log(JSON.stringify(m));
   console.log(m.value.toString());
+  let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: config.sender_email,
+      pass: config.sender_password
+    }
+  });
+  let mailOptions = {
+    from: config.sender_name +'<'+config.sender_email+'>',
+    to: config.destination_email,
+    subject: `Message from ` + config.kafka_topic,
+    text: m.value
+  };
+  transporter.sendMail(mailOptions, function(error, info) {
+
+    if (error) {
+      throw error;
+    } else {
+      console.log('Email successfully sent!');
+      
+    }
+  });
 
 });
 
