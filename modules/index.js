@@ -52,7 +52,7 @@ const config = require('../config/kafka');
             }
           });
          }
-         setTimeout(send(), 3000);
+         setTimeout(send, 3000);
           
         })
         consumer.on('error', function(err) {
