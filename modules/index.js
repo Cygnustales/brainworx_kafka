@@ -67,9 +67,9 @@ const config = require('../config/kafka');
           //   }
           // });
         //})
-        consumer.on('error', function(err) {
-          console.log('error', err);
-        });
+        // consumer.on('error', function(err) {
+        //   console.log('error', err);
+        // });
       }
       catch(e) {
         console.log(e);
