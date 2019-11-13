@@ -15,7 +15,7 @@
     "http-errors": "~1.6.2",
     "increase-memory-limit": "^1.0.3",
     "lodash": "^4.17.11",
-    "kafka-node": "^2.4.1",
+    "kafka-node": "5.0.0",
     "nodemon": "^1.17.3",
     "nodemailer": "^6.0.0"
   }

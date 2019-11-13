@@ -28,7 +28,7 @@ const config = require('../config/kafka');
             'kafka : ',
             message.value
           );
-          ///Please use Valid SMTP
+          
           // let transporter = nodemailer.createTransport({
           //   service: 'gmail',
           //   auth: {
