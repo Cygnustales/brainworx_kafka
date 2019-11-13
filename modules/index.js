@@ -21,7 +21,7 @@ const config = require('../config/kafka');
             fromOffset: -1
           }
         );
-        var offset = new kafka.Offset(consumerClient);
+        var offset = new kafka.Offset(client);
 
         offset.fetch([{ topic: 'myTopic', partition: 0, time: -1 }], function (err, data) {
           var latestOffset = data['myTopic']['0'][0];
