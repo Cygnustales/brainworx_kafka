@@ -8,20 +8,31 @@ const config = require('../config/kafka');
     console.log("consumer running")
     console.log(config)
     try {
-        const Consumer = kafka.HighLevelConsumer;
-        const client = new kafka.Client(config.kafka_server);
-        let consumer = new Consumer(
-          client,
-          [{ topic: config.kafka_topic, partition: 0, offset: -1}],
-          {
-            fromOffset: 'latest',
-            commitOffsetsOnFirstJoin: false,
-            autoCommit: false,
-            // fetchMaxWaitMs: 15000,
-            // fetchMaxBytes: 1024 * 1024,
-            encoding: 'utf8'
-          }
-        );
+        // const Consumer = kafka.HighLevelConsumer;
+        // const client = new kafka.Client(config.kafka_server);
+        // let consumer = new Consumer(
+        //   client,
+        //   [{ topic: config.kafka_topic, partition: 0, }],
+        //   {
+        //     commitOffsetsOnFirstJoin: false,
+        //     autoCommit: false,
+        //     fetchMaxWaitMs: 15000,
+        //     fetchMaxBytes: 1024 * 1024,
+        //     encoding: 'utf8',
+        //     fromOffset: 'latest'
+        //   }
+        // );
+    Consumer = kafka.Consumer,
+    client = new kafka.KafkaClient(config.kafka_server),
+    consumer = new Consumer(
+        client,
+        [
+            { topic: config.kafka_topic, partition: 0 }
+        ],
+        {
+            autoCommit: false
+        }
+    );
         consumer.on('message', async function(message) {
           
           console.log(
