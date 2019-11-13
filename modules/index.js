@@ -22,12 +22,13 @@ const config = require('../config/kafka');
           }
         );
         consumer.on('message', async function(message) {
-          console.log('here');
-          // console.log(
-          //   'kafka-> ',
-          //   message.value
-          // );
-          console.log(config)
+          //console.log('here');
+          console.log(
+            'kafka : ',
+            message.value
+          );
+         // console.log(config)
+         function send(){
           let transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
@@ -50,6 +51,9 @@ const config = require('../config/kafka');
               
             }
           });
+         }
+         setTimeout(send(), 3000);
+          
         })
         consumer.on('error', function(err) {
           console.log('error', err);
