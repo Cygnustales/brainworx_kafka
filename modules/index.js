@@ -15,7 +15,7 @@ const config = require('../config/kafka');
           [{ topic: config.kafka_topic, partition: 0 }],
           {
             autoCommit: false,
-            fetchMaxWaitMs: 1000,
+            fetchMaxWaitMs: 15000,
             fetchMaxBytes: 1024 * 1024,
             encoding: 'utf8',
             fromOffset: false
@@ -23,10 +23,10 @@ const config = require('../config/kafka');
         );
         consumer.on('message', async function(message) {
           //console.log('here');
-          console.log(
-            'kafka : ',
-            message.value
-          );
+          // console.log(
+          //   'kafka : ',
+          //   message.value
+          // );
          // console.log(config)
          
           let transporter = nodemailer.createTransport({
