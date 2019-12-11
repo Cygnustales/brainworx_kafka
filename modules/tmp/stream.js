@@ -25,12 +25,12 @@ let nodemailer = require('nodemailer');
 const config = require('../config/kafka');
 var consumer = new Kafka.KafkaConsumer({
   //'debug': 'all',
-  'metadata.broker.list': 'zb-vm1:9092',
+  'metadata.broker.list': '0.0.0.0:2181',
 //   'group.id': 'node-rdkafka-consumer-flow-example',
   'enable.auto.commit': false
 });
 
-var topicName = 'simptest.unwrap2.dbo.Transaction';
+var topicName = 'WIKIPEDIABOT';
 
 //logging debug messages, if debug is enabled
 consumer.on('event.log', function(log) {

@@ -1,7 +1,7 @@
 
 module.exports = {
-    kafka_topic: "simptest.unwrap2.dbo.Transaction",
-    kafka_server: "zb-vm1:2181",
+    kafka_topic: "test1",
+    kafka_server: "localhost:2181",
     sender_email: "emailkirim360@gmail.com",
     sender_password: "formytest",
     sender_name: "Email Sender",
