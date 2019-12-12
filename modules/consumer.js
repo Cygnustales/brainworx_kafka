@@ -46,7 +46,7 @@ consumer.on('data', function(m) {
   }
 
   var message = 'Topic :'+m.topic+', Timestamp :' + m.timestamp
-  console.log(message)
+  console.log(m)
   //console.log(JSON.stringparify(m));
 
 
