@@ -4,7 +4,7 @@ const config = require('../config/kafka');
 
 var consumer = new Kafka.KafkaConsumer({
   //'debug': 'all',
-  'metadata.broker.list': 'localhost:9092',
+  'metadata.broker.list': config.kafka_server,
   'group.id': 'node-rdkafka-consumer-flow-example',
   'enable.auto.commit': false
 },{'auto.offset.reset': 'latest',});

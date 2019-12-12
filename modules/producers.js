@@ -4,7 +4,7 @@ const config = require('../config/kafka');
 
 var producer = new Kafka.Producer({
   //'debug' : 'all',
-  'metadata.broker.list': 'localhost:9092',
+  'metadata.broker.list': config.kafka_server,
   'dr_cb': true  //delivery report callback
 });
 
